@@ -13,7 +13,7 @@ getSingleThought(req, res) {
       .select('-__v')
       .then(async (thought) =>
         !thought
-          ? res.status(404).json({ message: 'No thought with that ID' })
+          ? res.status(404).json({ message: 'No thought with this id!' })
           : res.json({
             thought,
             })
@@ -36,7 +36,7 @@ createThought(req, res) {
         .then((user) =>
         !user
             ? res.status(404).json({
-                message: 'Thought created, but found no user with that ID',
+                message: 'Thought created, but found no user with that id!',
             })
             : res.json('Created the thought 🎉')
           )
@@ -64,7 +64,7 @@ updateThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: 'No such thought exists' })
+          ? res.status(404).json({ message: 'No thought with this id!' })
           : User.findOneAndUpdate(
             { username: req.body.username },
             { $pull: { thoughts: req.params.thoughtId } },
